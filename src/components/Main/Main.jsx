@@ -2,6 +2,7 @@ import Card from "../Card/Card";
 import Tags from '../Tags/Tags.jsx';
 //import initialPosts from '../../posts.jsx';
 import { useEffect, useState } from "react";
+import axios from 'axios'
 
 const initialFormData = {
     title: '',
