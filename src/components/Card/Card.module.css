@@ -1,0 +1,52 @@
+.card {
+    background-color: white;
+    border-radius: 10px;
+    font-size: 15px;
+    color: rgb(48, 48, 48);
+    margin-top: 30px;
+}
+
+
+.image {
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    aspect-ratio: 3/2;
+}
+
+.figure {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 3/2;
+}
+
+.body {
+    margin: 10px;
+}
+
+.btn_inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deleteBtn {
+    border: none;
+    background-color: rgb(36, 138, 90);
+    border-radius: 5px;
+    padding: 5px 5px;
+    color: white;
+    cursor: pointer;
+    aspect-ratio: 2.5/ 1;
+    margin-bottom: 10px;
+}
+
+.deleteBtn:hover {
+    background-color: #361c1b;
+}
+
+.category {
+    margin-top: 5px;
+    display: flex;
+    gap: 5px;
+}
