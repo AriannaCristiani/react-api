@@ -17,14 +17,32 @@ const API_BASE_URI = 'http://localhost:3000/'
 
 export default function Main() {
 
-    const [formData, setFormData] = useState([]);
-    const [posts, setPosts] = useState(initialPosts);
+    const [formData, setFormData] = useState(initialFormData);
+    const [posts, setPosts] = useState([]);
     const [publishedPosts, setPublishedPosts] = useState([]);
     const [tags, setTags] = useState([]);
 
 
+
+    function fetchPosts() {
+        axios.get(`${API_BASE_URI}posts`)
+            .then(res => {
+                console.log('posts response:', res)
+                setPosts(res.data.filteredPosts)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
+
+    useEffect(() => {
+        fetchPosts()
+    }, [])
+
+
     useEffect(() => {
         setPublishedPosts(posts.filter((post) => post.published))
+
 
         const tagsItems = []
         posts.forEach(post => {
@@ -40,6 +58,7 @@ export default function Main() {
         setTags(tagsItems)
 
     }, [posts])
+
 
 
 
@@ -61,19 +80,6 @@ export default function Main() {
 
     }
 
-    function fetchPosts() {
-        axios.get(`${API_BASE_URI}posts`)
-            .then(res => {
-                console.log('posts response:', res)
-            })
-            .catch(err => {
-                console.error(err)
-            })
-    }
-
-    useEffect(() => {
-        fetchPosts()
-    }, [])
 
     function handleFormData(event) {
         const { name, value, type, checked } = event.target
