@@ -47,7 +47,7 @@ export default function Main() {
         const tagsItems = []
         posts.forEach(post => {
             const postTags = post.tags
-            console.log(postTags)
+            //console.log(postTags)
 
             postTags.forEach((tag) => {
                 if (!tagsItems.includes(tag)) {
@@ -60,19 +60,22 @@ export default function Main() {
     }, [posts])
 
 
-
-
     function addPost(event) {
-        event.preventDefault()
+        event.preventDefault();
 
-        const post = {
-            id: Date.now(),
+        const newPost = {
             ...formData,
             tags: formData.tags.split(',').map(tag => tag.trim())
-        }
-        setPosts([...posts, post])
-        setFormData(initialFormData)
+        };
 
+        axios.post(`${API_BASE_URI}posts`, newPost)
+            .then((res) => {
+                console.log(res);
+                setPosts([...posts, res.data]);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     function deletePost(id) {
