@@ -1,6 +1,6 @@
 import Card from "../Card/Card";
 import Tags from '../Tags/Tags.jsx';
-import initialPosts from '../../posts.jsx';
+//import initialPosts from '../../posts.jsx';
 import { useEffect, useState } from "react";
 
 const initialFormData = {
@@ -12,9 +12,11 @@ const initialFormData = {
     published: true
 };
 
+const API_BASE_URI = 'http://localhost:3000/'
+
 export default function Main() {
 
-    const [formData, setFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState([]);
     const [posts, setPosts] = useState(initialPosts);
     const [publishedPosts, setPublishedPosts] = useState([]);
     const [tags, setTags] = useState([]);
@@ -105,9 +107,9 @@ export default function Main() {
                             onChange={handleFormData}
                         >
                             <option value="">Seleziona una categoria</option>
-                            <option value="Fiori">Fiori</option>
-                            <option value="Piante">Piante</option>
-                            <option value="Alberi">Alberi</option>
+                            <option value="Dolci">Dolci</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Primi">Primi</option>
                         </select>
                         <input
                             className="formText"
