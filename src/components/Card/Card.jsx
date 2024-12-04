@@ -1,6 +1,7 @@
 import style from './Card.module.css';
 import placeHolderSrc from '../../assets/placeholder.png';
 import Tags from '../Tags/Tags';
+import { API_BASE_URI } from '../Main/Main';
 
 export default function Card({ post, onDelete }) {
     const { id, title, image, content, tags, published, category } = post;
@@ -10,7 +11,7 @@ export default function Card({ post, onDelete }) {
     return (
         <div className={style.card}>
             <figure className={style.figure}>
-                <img className={style.image} src={image || placeHolderSrc} alt="" />
+                <img className={style.image} src={image ? API_BASE_URI + image : placeHolderSrc} alt="" />
             </figure>
             <div className={style.body}>
                 <h3>{title}</h3>

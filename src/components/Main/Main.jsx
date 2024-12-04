@@ -13,7 +13,7 @@ const initialFormData = {
     published: true
 };
 
-const API_BASE_URI = 'http://localhost:3000/'
+export const API_BASE_URI = 'http://localhost:3000/'
 
 export default function Main() {
 
