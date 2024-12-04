@@ -61,6 +61,20 @@ export default function Main() {
 
     }
 
+    function fetchPosts() {
+        axios.get(`${API_BASE_URI}posts`)
+            .then(res => {
+                console.log('posts response:', res)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
+
+    useEffect(() => {
+        fetchPosts()
+    }, [])
+
     function handleFormData(event) {
         const { name, value, type, checked } = event.target
 
