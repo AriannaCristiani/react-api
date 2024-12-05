@@ -35,6 +35,19 @@ export default function Main() {
             })
     }
 
+    const tagsItems = []
+    posts.forEach(post => {
+        const postTags = post.tags
+        //console.log(postTags)
+
+        postTags.forEach((tag) => {
+            if (!tagsItems.includes(tag)) {
+                tagsItems.push(tag)
+            }
+        })
+    })
+
+
     useEffect(() => {
         fetchPosts()
     }, [])
@@ -42,21 +55,7 @@ export default function Main() {
 
     useEffect(() => {
         setPublishedPosts(posts.filter((post) => post.published))
-
-
-        const tagsItems = []
-        posts.forEach(post => {
-            const postTags = post.tags
-            //console.log(postTags)
-
-            postTags.forEach((tag) => {
-                if (!tagsItems.includes(tag)) {
-                    tagsItems.push(tag)
-                }
-            })
-        })
         setTags(tagsItems)
-
     }, [posts])
 
 
@@ -78,9 +77,19 @@ export default function Main() {
             });
     }
 
-    function deletePost(id) {
-        setPublishedPosts(publishedPosts.filter(post => post.id !== id))
 
+
+    function deletePost(id) {
+        //setPublishedPosts(publishedPosts.filter(post => post.id !== id))
+
+        axios.delete(`${API_BASE_URI}posts/${id}`)
+            .then((res) => {
+                console.log(res);
+                setPosts(posts.filter(post => post.id !== id));
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
 
