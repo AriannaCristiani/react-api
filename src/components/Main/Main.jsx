@@ -22,6 +22,17 @@ export default function Main() {
     const [publishedPosts, setPublishedPosts] = useState([]);
     const [tags, setTags] = useState([]);
 
+    const tagsItems = []
+    posts.forEach(post => {
+        const postTags = post.tags
+        //console.log(postTags)
+
+        postTags.forEach((tag) => {
+            if (!tagsItems.includes(tag)) {
+                tagsItems.push(tag)
+            }
+        })
+    })
 
 
     function fetchPosts() {
@@ -34,18 +45,6 @@ export default function Main() {
                 console.error(err)
             })
     }
-
-    const tagsItems = []
-    posts.forEach(post => {
-        const postTags = post.tags
-        //console.log(postTags)
-
-        postTags.forEach((tag) => {
-            if (!tagsItems.includes(tag)) {
-                tagsItems.push(tag)
-            }
-        })
-    })
 
 
     useEffect(() => {
@@ -78,14 +77,16 @@ export default function Main() {
     }
 
 
-
     function deletePost(id) {
         //setPublishedPosts(publishedPosts.filter(post => post.id !== id))
 
-        axios.delete(`${API_BASE_URI}posts/${id}`)
+        const userChoise = confirm('Vuoi davvero eliminare questo post?')
+
+        userChoise && axios.delete(`${API_BASE_URI}posts/${id}`)
             .then((res) => {
                 console.log(res);
                 setPosts(posts.filter(post => post.id !== id));
+                fetchPosts()
             })
             .catch((err) => {
                 console.error(err);
